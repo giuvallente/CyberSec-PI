@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Relatório de Privacidade</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 10px; width: 300px; }
+    h1 { font-size: 18px; margin-bottom: 10px; }
+    .item { margin: 6px 0; }
+    .seguro { color: green; }
+    .medio { color: orange; }
+    .arriscado { color: red; }
+  </style>
+</head>
+<body>
+  <h1>Relatório de Privacidade</h1>
+
+  <div class="item"><b>Conexões de 3ª parte:</b> <span id="terceiros">Carregando...</span></div>
+  <div class="item"><b>Hijacking/Hook:</b> <span id="hijack">Carregando...</span></div>
+  <div class="item"><b>Storage Local (HTML5):</b> <span id="storage">Carregando...</span></div>
+  <div class="item"><b>Cookies 1ª parte:</b> <span id="cookies1p">Carregando...</span></div>
+  <div class="item"><b>Cookies 3ª parte:</b> <span id="cookies3p">Carregando...</span></div>
+  <div class="item"><b>Supercookies:</b> <span id="supercookies">Carregando...</span></div>
+  <div class="item"><b>Canvas Fingerprint:</b> <span id="canvas">Carregando...</span></div>
+  <hr>
+  <div class="item"><b>Pontuação:</b> <span id="score">...</span></div>
+  <div class="item"><b>Nível:</b> <span id="nivel" class="seguro">...</span></div>
+
+  <script src="privacyScore.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>

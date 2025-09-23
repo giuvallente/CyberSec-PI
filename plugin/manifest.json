@@ -1,0 +1,28 @@
+{
+  "manifest_version": 2,
+  "name": "Detector de Rastreadores",
+  "version": "1.0",
+  "description": "Extensão para detectar conexões de terceiros, cookies, localStorage e fingerprinting.",
+  "permissions": [
+    "webRequest",
+    "webRequestBlocking",
+    "cookies",
+    "storage",
+    "<all_urls>",
+    "tabs"
+  ],
+  "background": {
+    "scripts": ["background.js"]
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"]
+    }
+  ],
+  "browser_action": {
+    "default_title": "Privacidade",
+    "default_popup": "popup.html",
+    "default_icon": "icons/icon.png"
+  }
+}
