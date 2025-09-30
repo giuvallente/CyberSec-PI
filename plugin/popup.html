@@ -165,6 +165,407 @@
     .supercookie-item:last-child {
       margin-bottom: 0;
     }
+
+    /* Botões expansíveis */
+    .expand-btn {
+      background: #e2e8f0;
+      border: none;
+      border-radius: 4px;
+      padding: 4px 8px;
+      font-size: 10px;
+      font-weight: 500;
+      color: #4a5568;
+      cursor: pointer;
+      margin-left: 8px;
+      transition: all 0.2s ease;
+    }
+
+    .expand-btn:hover {
+      background: #cbd5e0;
+    }
+
+    .expand-btn.expanded {
+      background: #3182ce;
+      color: white;
+    }
+
+    .value-container {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      align-items: flex-end;
+    }
+
+    .value-row {
+      display: flex;
+      align-items: center;
+    }
+
+    .storage-list {
+      max-height: 100px;
+      overflow-y: auto;
+      background: #f8fafc;
+      border-radius: 4px;
+      padding: 8px;
+      margin-top: 6px;
+      font-size: 11px;
+      width: 100%;
+    }
+
+    .storage-item {
+      padding: 3px 0;
+      color: #4a5568;
+      font-weight: 500;
+      margin-bottom: 2px;
+    }
+
+    .storage-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .cookies-list {
+      max-height: 100px;
+      overflow-y: auto;
+      background: #f8fafc;
+      border-radius: 4px;
+      padding: 8px;
+      margin-top: 6px;
+      font-size: 11px;
+    }
+
+    .cookie-item {
+      padding: 3px 0;
+      color: #4a5568;
+      font-weight: 500;
+      margin-bottom: 2px;
+    }
+
+    .cookie-item:last-child {
+      margin-bottom: 0;
+    }
+
+    /* Estilos para identificação de rastreadores */
+    .tracker-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 6px 8px;
+      margin: 2px 0;
+      border-radius: 6px;
+      background: #f8fafc;
+      border-left: 3px solid #e2e8f0;
+      transition: all 0.2s ease;
+    }
+
+    .tracker-item:hover {
+      background: #f1f5f9;
+      transform: translateX(2px);
+    }
+
+    .tracker-item.ads {
+      border-left-color: #e53e3e;
+      background: #fed7d7;
+    }
+
+    .tracker-item.analytics {
+      border-left-color: #3182ce;
+      background: #bee3f8;
+    }
+
+    .tracker-item.social {
+      border-left-color: #805ad5;
+      background: #e9d8fd;
+    }
+
+    .tracker-item.marketing {
+      border-left-color: #d69e2e;
+      background: #faf089;
+    }
+
+    .tracker-item.cdn {
+      border-left-color: #38a169;
+      background: #c6f6d5;
+    }
+
+    .tracker-item.unknown {
+      border-left-color: #718096;
+      background: #e2e8f0;
+    }
+
+    .tracker-info {
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+      min-width: 0;
+    }
+
+    .tracker-domain {
+      font-weight: 600;
+      font-size: 11px;
+      color: #2d3748;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .tracker-name {
+      font-size: 9px;
+      color: #4a5568;
+      margin-top: 1px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .tracker-badge {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      padding: 2px 6px;
+      border-radius: 12px;
+      font-size: 9px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+      white-space: nowrap;
+    }
+
+    .tracker-badge.ads {
+      background: #e53e3e;
+      color: white;
+    }
+
+    .tracker-badge.analytics {
+      background: #3182ce;
+      color: white;
+    }
+
+    .tracker-badge.social {
+      background: #805ad5;
+      color: white;
+    }
+
+    .tracker-badge.marketing {
+      background: #d69e2e;
+      color: white;
+    }
+
+    .tracker-badge.cdn {
+      background: #38a169;
+      color: white;
+    }
+
+    .tracker-badge.unknown {
+      background: #718096;
+      color: white;
+    }
+
+    .tracker-icon {
+      font-size: 10px;
+    }
+
+    /* Estatísticas de rastreadores */
+    .tracker-stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      margin-top: 8px;
+      padding: 8px;
+      background: #f8fafc;
+      border-radius: 4px;
+      font-size: 10px;
+    }
+
+    .tracker-stat {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      padding: 2px 4px;
+      border-radius: 8px;
+      font-weight: 500;
+    }
+
+    .tracker-stat.ads {
+      background: #e53e3e;
+      color: white;
+    }
+
+    .tracker-stat.analytics {
+      background: #3182ce;
+      color: white;
+    }
+
+    .tracker-stat.social {
+      background: #805ad5;
+      color: white;
+    }
+
+    .tracker-stat.marketing {
+      background: #d69e2e;
+      color: white;
+    }
+
+    .tracker-stat.cdn {
+      background: #38a169;
+      color: white;
+    }
+
+    /* Separador entre rastreadores e conexões normais */
+    .section-divider {
+      margin: 8px 0;
+      padding: 4px 0;
+      border-top: 1px solid #e2e8f0;
+      font-size: 9px;
+      font-weight: 600;
+      color: #718096;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* Controles de Bloqueio */
+    .blocker-controls {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 12px 16px;
+      margin: 12px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .blocker-info {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .blocker-title {
+      font-weight: 600;
+      font-size: 12px;
+      color: #2d3748;
+      margin-bottom: 2px;
+    }
+
+    .blocker-stats {
+      font-size: 10px;
+      color: #718096;
+    }
+
+    /* Toggle Switch */
+    .toggle-switch {
+      position: relative;
+      width: 44px;
+      height: 24px;
+      background: #cbd5e0;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .toggle-switch.active {
+      background: #48bb78;
+    }
+
+    .toggle-switch::before {
+      content: '';
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      width: 20px;
+      height: 20px;
+      background: white;
+      border-radius: 50%;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .toggle-switch.active::before {
+      transform: translateX(20px);
+    }
+
+    /* Botões de Bloqueio */
+    .block-btn {
+      background: #e53e3e;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      padding: 2px 6px;
+      font-size: 9px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      margin-left: 6px;
+    }
+
+    .block-btn:hover {
+      background: #c53030;
+      transform: scale(1.05);
+    }
+
+    .block-btn.blocked {
+      background: #38a169;
+    }
+
+    .block-btn.blocked:hover {
+      background: #2f855a;
+    }
+
+    .block-btn:disabled {
+      background: #a0aec0;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    /* Contador de Bloqueios */
+    .block-counter {
+      background: linear-gradient(135deg, #e53e3e, #c53030);
+      color: white;
+      padding: 4px 8px;
+      border-radius: 12px;
+      font-size: 10px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      box-shadow: 0 2px 4px rgba(229, 62, 62, 0.3);
+    }
+
+    .block-counter.zero {
+      background: linear-gradient(135deg, #718096, #4a5568);
+      box-shadow: 0 2px 4px rgba(113, 128, 150, 0.3);
+    }
+
+    /* Indicador de Status */
+    .blocker-status {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 10px;
+      font-weight: 500;
+    }
+
+    .status-indicator {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #cbd5e0;
+    }
+
+    .status-indicator.active {
+      background: #48bb78;
+      box-shadow: 0 0 6px rgba(72, 187, 120, 0.5);
+    }
+
+    /* Tracker item com botão de bloqueio */
+    .tracker-actions {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .tracker-item .tracker-badge {
+      margin-right: 4px;
+    }
   </style>
 </head>
 <body>
@@ -177,31 +578,71 @@
     <div class="score-level excelente" id="nivel">Carregando...</div>
   </div>
 
+  <!-- Controles de Bloqueio -->
+  <div class="blocker-controls">
+    <div class="blocker-info">
+      <div class="blocker-title">🛡️ Proteção Ativa</div>
+      <div class="blocker-stats">
+        <span class="blocker-status">
+          <span class="status-indicator" id="statusIndicator"></span>
+          <span id="blockerStatusText">Carregando...</span>
+        </span>
+      </div>
+    </div>
+    <div style="display: flex; align-items: center; gap: 8px;">
+      <div class="block-counter zero" id="blockCounter">
+        🚫 <span id="blockCountText">0</span>
+      </div>
+      <div class="toggle-switch" id="blockerToggle"></div>
+    </div>
+  </div>
+
   <div class="content">
     <div class="data-row">
       <span class="label">Conexões 3ª parte</span>
-      <div>
-        <span class="value loading" id="terceiros">-</span>
+      <div class="value-container">
+        <div class="value-row">
+          <span class="value loading" id="terceiros">-</span>
+          <button class="expand-btn" id="expandConnections" style="display: none;">Ver</button>
+        </div>
         <div class="connections-list" id="connectionsList" style="display: none;"></div>
       </div>
     </div>
     <div class="data-row">
       <span class="label">Cookies 1ª parte</span>
-      <span class="value loading" id="cookies1p">-</span>
+      <div class="value-container">
+        <div class="value-row">
+          <span class="value loading" id="cookies1p">-</span>
+          <button class="expand-btn" id="expandCookies1p" style="display: none;">Ver</button>
+        </div>
+        <div class="cookies-list" id="cookies1pList" style="display: none;"></div>
+      </div>
     </div>
     <div class="data-row">
       <span class="label">Cookies 3ª parte</span>
-      <span class="value loading" id="cookies3p">-</span>
-    </div>
-    <div class="data-row">
-      <span class="label">Storage local</span>
-      <span class="value loading" id="storage">-</span>
+      <div class="value-container">
+        <div class="value-row">
+          <span class="value loading" id="cookies3p">-</span>
+          <button class="expand-btn" id="expandCookies3p" style="display: none;">Ver</button>
+        </div>
+        <div class="cookies-list" id="cookies3pList" style="display: none;"></div>
+      </div>
     </div>
     <div class="data-row">
       <span class="label">Supercookies</span>
-      <div>
-        <span class="value loading" id="supercookies">-</span>
+      <div class="value-container">
+        <div class="value-row">
+          <span class="value loading" id="supercookies">-</span>
+          <button class="expand-btn" id="expandSupercookies" style="display: none;">Ver</button>
+        </div>
         <div class="supercookies-list" id="supercookiesList" style="display: none;"></div>
+      </div>
+    </div>
+    <div class="data-row">
+      <span class="label">Storage local</span>
+      <div class="value-container" id="storageContainer">
+        <span class="value loading" id="storage">-</span>
+        <div class="storage-list" id="storageList" style="display: none;"></div>
       </div>
     </div>
     <div class="data-row">
@@ -214,6 +655,8 @@
     </div>
   </div>
 
+  <script src="trackers.js"></script>
+  <script src="blocker.js"></script>
   <script src="privacyScore.js"></script>
   <script src="popup.js"></script>
 </body>

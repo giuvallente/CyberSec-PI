@@ -1,6 +1,49 @@
 // Armazenar dados detectados por aba
 let dadosAbas = {};
 
+// Inicializar sistema de bloqueio
+let blockerManager = null;
+
+// Aguardar um momento para que todos os scripts carreguem
+setTimeout(async () => {
+  try {
+    // A classe BlockerManager deve estar disponível globalmente via blocker.js
+    if (typeof BlockerManager !== 'undefined') {
+      blockerManager = new BlockerManager();
+      setupBlockingLogic();
+    } else {
+      console.error('BlockerManager não encontrado - verifique se blocker.js foi carregado');
+    }
+  } catch (error) {
+    console.error('Erro ao inicializar sistema de bloqueio:', error);
+  }
+}, 100);
+
+// Configurar lógica de bloqueio de requisições
+function setupBlockingLogic() {
+  // Interceptar requisições para bloqueio
+  browser.webRequest.onBeforeRequest.addListener(
+    (details) => {
+      if (!blockerManager) return {};
+      
+      // Verificar se deve bloquear a requisição
+      if (blockerManager.shouldBlockRequest(details.url)) {
+        console.log('🚫 Bloqueando requisição:', details.url);
+        
+        // Incrementar contador de bloqueios
+        blockerManager.incrementBlockCount();
+        
+        // Cancelar a requisição
+        return { cancel: true };
+      }
+      
+      return {};
+    },
+    { urls: ["<all_urls>"] },
+    ["blocking"]
+  );
+}
+
 // Detectar conexões de terceiros
 browser.webRequest.onBeforeRequest.addListener(
   details => {
@@ -49,12 +92,24 @@ async function detectarCookies(tabId, url) {
     const cookies = await browser.cookies.getAll({ url: url });
     let primeiraParte = 0;
     let terceiraParte = 0;
+    let listaCookies1p = [];
+    let listaCookies3p = [];
 
     cookies.forEach(cookie => {
       if (cookie.domain.includes(dominioPrincipal)) {
         primeiraParte++;
+        listaCookies1p.push({
+          name: cookie.name,
+          domain: cookie.domain,
+          value: cookie.value ? cookie.value.substring(0, 20) + (cookie.value.length > 20 ? '...' : '') : ''
+        });
       } else {
         terceiraParte++;
+        listaCookies3p.push({
+          name: cookie.name,
+          domain: cookie.domain,
+          value: cookie.value ? cookie.value.substring(0, 20) + (cookie.value.length > 20 ? '...' : '') : ''
+        });
       }
     });
 
@@ -68,11 +123,13 @@ async function detectarCookies(tabId, url) {
     }
     dadosAbas[tabId].cookiesPrimeiraParte = primeiraParte;
     dadosAbas[tabId].cookiesTerceiros = terceiraParte;
+    dadosAbas[tabId].listaCookies1p = listaCookies1p;
+    dadosAbas[tabId].listaCookies3p = listaCookies3p;
 
-    return { primeiraParte, terceiraParte };
+    return { primeiraParte, terceiraParte, listaCookies1p, listaCookies3p };
   } catch (error) {
     console.error("Erro ao detectar cookies:", error);
-    return { primeiraParte: 0, terceiraParte: 0 };
+    return { primeiraParte: 0, terceiraParte: 0, listaCookies1p: [], listaCookies3p: [] };
   }
 }
 
@@ -85,6 +142,12 @@ browser.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
 
 // Listener para mensagens do popup
 browser.runtime.onMessage.addListener((request, sender, sendResponse) => {
+  // Delegar mensagens do bloqueador
+  if (blockerManager && ['getBlockerStats', 'toggleBlocking', 'blockDomain', 'unblockDomain', 'resetSessionCount'].includes(request.action)) {
+    // A classe BlockerManager já configurou seu próprio listener
+    return;
+  }
+  
   if (request.action === "getReport") {
     browser.tabs.query({ active: true, currentWindow: true }).then((tabs) => {
       const tabAtual = tabs[0];
@@ -102,6 +165,8 @@ browser.runtime.onMessage.addListener((request, sender, sendResponse) => {
           localStorage: contentData?.localStorage || false,
           cookiesPrimeiraParte: dados.cookiesPrimeiraParte || 0,
           cookiesTerceiros: dados.cookiesTerceiros || 0,
+          listaCookies1p: dados.listaCookies1p || [],
+          listaCookies3p: dados.listaCookies3p || [],
           supercookies: dados.etag || contentData?.indexedDB || contentData?.serviceWorker || false,
           supercookiesDetalhes: {
             etag: dados.etag || false,
@@ -125,6 +190,8 @@ browser.runtime.onMessage.addListener((request, sender, sendResponse) => {
           localStorage: false,
           cookiesPrimeiraParte: dados.cookiesPrimeiraParte || 0,
           cookiesTerceiros: dados.cookiesTerceiros || 0,
+          listaCookies1p: dados.listaCookies1p || [],
+          listaCookies3p: dados.listaCookies3p || [],
           supercookies: dados.etag || false,
           supercookiesDetalhes: {
             etag: dados.etag || false,
