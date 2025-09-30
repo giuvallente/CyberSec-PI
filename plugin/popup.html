@@ -1,30 +1,218 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <title>Relatório de Privacidade</title>
+  <meta charset="utf-8">
+  <title>Privacy Report</title>
   <style>
-    body { font-family: Arial, sans-serif; padding: 10px; width: 300px; }
-    h1 { font-size: 18px; margin-bottom: 10px; }
-    .item { margin: 6px 0; }
-    .seguro { color: green; }
-    .medio { color: orange; }
-    .arriscado { color: red; }
+    body { 
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      width: 300px;
+      margin: 0;
+      padding: 0;
+      font-size: 13px;
+      background: white;
+      color: #333;
+    }
+
+    .header {
+      background: white;
+      padding: 12px 16px;
+      text-align: center;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    .header h1 {
+      margin: 0;
+      font-size: 16px;
+      font-weight: 600;
+      color: #4a5568;
+    }
+
+    .score {
+      padding: 16px;
+      text-align: center;
+      background: white;
+    }
+
+    .score-num {
+      font-size: 28px;
+      font-weight: 700;
+      color: #4a5568;
+      margin-bottom: 4px;
+    }
+
+    .score-level {
+      padding: 3px 8px;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+      display: inline-block;
+    }
+
+    .content {
+      background: white;
+      padding: 16px;
+    }
+
+    .data-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 0;
+      border-bottom: 1px solid #f1f5f9;
+      transition: background-color 0.2s ease;
+    }
+
+    .data-row:hover {
+      background: #f8fafc;
+      margin: 0 -16px;
+      padding-left: 16px;
+      padding-right: 16px;
+    }
+
+    .data-row:last-child {
+      border-bottom: none;
+    }
+
+    .label {
+      color: #4a5568;
+      font-weight: 500;
+    }
+
+    .value {
+      font-weight: 600;
+      min-width: 45px;
+      text-align: right;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 12px;
+    }
+
+    /* Cores dos níveis */
+    .excelente { 
+      background: linear-gradient(135deg, #48bb78, #38a169); 
+      color: white;
+      box-shadow: 0 2px 4px rgba(72, 187, 120, 0.3);
+    }
+    .bom { 
+      background: linear-gradient(135deg, #4299e1, #3182ce); 
+      color: white;
+      box-shadow: 0 2px 4px rgba(66, 153, 225, 0.3);
+    }
+    .moderado { 
+      background: linear-gradient(135deg, #ed8936, #dd6b20); 
+      color: white;
+      box-shadow: 0 2px 4px rgba(237, 137, 54, 0.3);
+    }
+    .alto { 
+      background: linear-gradient(135deg, #f56565, #e53e3e); 
+      color: white;
+      box-shadow: 0 2px 4px rgba(245, 101, 101, 0.3);
+    }
+    .critico { 
+      background: linear-gradient(135deg, #e53e3e, #c53030); 
+      color: white;
+      box-shadow: 0 2px 4px rgba(229, 62, 62, 0.4);
+    }
+
+    /* Estado de carregamento */
+    .loading {
+      color: #a0aec0;
+      font-style: italic;
+    }
+
+    /* Lista de conexões */
+    .connections-list {
+      max-height: 100px;
+      overflow-y: auto;
+      background: #f8fafc;
+      border-radius: 4px;
+      padding: 8px;
+      margin-top: 6px;
+      font-size: 11px;
+    }
+
+    .connection-item {
+      padding: 3px 0;
+      color: #4a5568;
+      font-weight: 500;
+      margin-bottom: 2px;
+    }
+
+    .connection-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .supercookies-list {
+      max-height: 100px;
+      overflow-y: auto;
+      background: #f8fafc;
+      border-radius: 4px;
+      padding: 8px;
+      margin-top: 6px;
+      font-size: 11px;
+    }
+
+    .supercookie-item {
+      padding: 3px 0;
+      color: #4a5568;
+      font-weight: 500;
+      margin-bottom: 2px;
+    }
+
+    .supercookie-item:last-child {
+      margin-bottom: 0;
+    }
   </style>
 </head>
 <body>
-  <h1>Relatório de Privacidade</h1>
+  <div class="header">
+    <h1>Relatório de Privacidade</h1>
+  </div>
 
-  <div class="item"><b>Conexões de 3ª parte:</b> <span id="terceiros">Carregando...</span></div>
-  <div class="item"><b>Hijacking/Hook:</b> <span id="hijack">Carregando...</span></div>
-  <div class="item"><b>Storage Local (HTML5):</b> <span id="storage">Carregando...</span></div>
-  <div class="item"><b>Cookies 1ª parte:</b> <span id="cookies1p">Carregando...</span></div>
-  <div class="item"><b>Cookies 3ª parte:</b> <span id="cookies3p">Carregando...</span></div>
-  <div class="item"><b>Supercookies:</b> <span id="supercookies">Carregando...</span></div>
-  <div class="item"><b>Canvas Fingerprint:</b> <span id="canvas">Carregando...</span></div>
-  <hr>
-  <div class="item"><b>Pontuação:</b> <span id="score">...</span></div>
-  <div class="item"><b>Nível:</b> <span id="nivel" class="seguro">...</span></div>
+  <div class="score">
+    <div class="score-num" id="score">0</div>
+    <div class="score-level excelente" id="nivel">Carregando...</div>
+  </div>
+
+  <div class="content">
+    <div class="data-row">
+      <span class="label">Conexões 3ª parte</span>
+      <div>
+        <span class="value loading" id="terceiros">-</span>
+        <div class="connections-list" id="connectionsList" style="display: none;"></div>
+      </div>
+    </div>
+    <div class="data-row">
+      <span class="label">Cookies 1ª parte</span>
+      <span class="value loading" id="cookies1p">-</span>
+    </div>
+    <div class="data-row">
+      <span class="label">Cookies 3ª parte</span>
+      <span class="value loading" id="cookies3p">-</span>
+    </div>
+    <div class="data-row">
+      <span class="label">Storage local</span>
+      <span class="value loading" id="storage">-</span>
+    </div>
+    <div class="data-row">
+      <span class="label">Supercookies</span>
+      <div>
+        <span class="value loading" id="supercookies">-</span>
+        <div class="supercookies-list" id="supercookiesList" style="display: none;"></div>
+      </div>
+    </div>
+    <div class="data-row">
+      <span class="label">Canvas fingerprint</span>
+      <span class="value loading" id="canvas">-</span>
+    </div>
+    <div class="data-row">
+      <span class="label">Hijacking</span>
+      <span class="value loading" id="hijack">-</span>
+    </div>
+  </div>
 
   <script src="privacyScore.js"></script>
   <script src="popup.js"></script>
